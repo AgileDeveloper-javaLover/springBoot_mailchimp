@@ -11,7 +11,7 @@
 	<groupId>com.cskaa</groupId>
 	<artifactId>mailchimp_demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>mailchimp_demo</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
