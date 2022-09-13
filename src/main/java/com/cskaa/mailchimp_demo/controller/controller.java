@@ -23,7 +23,7 @@ public class controller {
 //        System.out.println(mailEvents);
 //    }
 
-    @GetMapping("health")
+    @GetMapping("/health")
     public void getHealth(){
         System.out.println("Application is running");
     }
