@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
-@RestController("/mailchimp")
-public class controller {
+@RestController("/chimp")
+public class MyController {
 
 //    @PostMapping(value = "/mail-processing")
 //    public void mailProcessing(@RequestParam MandrillEvents mailEvents, HttpServletRequest request){
