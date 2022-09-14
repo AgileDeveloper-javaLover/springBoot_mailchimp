@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
@@ -20,13 +21,19 @@ public class UserController {
 //        System.out.println(mailEvents);
 //    }
 
-    @RequestMapping("/health")
-    public void getHealth(){
+    @RequestMapping(value = "/health",method = RequestMethod.GET)
+    public void getHealth(HttpServletResponse response){
+
         System.out.println("Application is running");
+        try {
+            response.getWriter().println("Application is running");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @RequestMapping(value = "/mail-processing", method = RequestMethod.POST)
-    public void mailProcessing(HttpServletRequest request){
+    public void mailProcessing(HttpServletRequest request,HttpServletResponse response){
         String body = null;
         try {
             body = request.getReader().lines().collect(Collectors.joining("\n"));
@@ -38,7 +45,11 @@ public class UserController {
         try {
             JsonNode json = mapper.readTree(body);
             System.out.println(json);
+            response.getWriter().println("Application is running");
         } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
 

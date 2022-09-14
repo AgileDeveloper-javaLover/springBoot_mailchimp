@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
@@ -24,12 +25,17 @@ public class controller {
 //    }
 
     @GetMapping("/health")
-    public void getHealth(){
+    public void getHealth(HttpServletResponse response){
         System.out.println("Application is running");
+        try {
+            response.getWriter().println("Application is running");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @PostMapping(value = "/mail-processing")
-    public void mailProcessing(HttpServletRequest request){
+    public void mailProcessing(HttpServletRequest request,HttpServletResponse response){
         String body = null;
         try {
             body = request.getReader().lines().collect(Collectors.joining("\n"));
@@ -41,7 +47,11 @@ public class controller {
         try {
             JsonNode json = mapper.readTree(body);
             System.out.println(json);
+            response.getWriter().println("Application is running");
         } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
 
