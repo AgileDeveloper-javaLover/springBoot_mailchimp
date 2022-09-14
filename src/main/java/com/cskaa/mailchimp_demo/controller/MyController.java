@@ -47,7 +47,7 @@ public class MyController {
         try {
             JsonNode json = mapper.readTree(body);
             System.out.println(json);
-            response.getWriter().println("Application is running");
+            response.getWriter().println(json);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
